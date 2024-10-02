@@ -1,27 +1,13 @@
-import React from 'react';
-import { Button } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
-import useAuthStore from '../../stores/authStore';
+import Header from "../../components/header/header";
+import Footer from "../../components/footer/footer";
 
-const LogoutButton = () => {
-  const navigate = useNavigate();
-  const { logout, isLoading } = useAuthStore();
-
-  const handleLogout = async () => {
-    await logout();
-    navigate('/');
-  };
-
+const Home = () => {
   return (
-    <Button
-      onClick={handleLogout}
-      loading={isLoading}
-      color="red"
-      variant="outline"
-    >
-      Cerrar Sesión
-    </Button>
+    <div>
+      <Header/>
+      <Footer/>
+    </div>
   );
 };
 
-export default LogoutButton;
+export default Home;
