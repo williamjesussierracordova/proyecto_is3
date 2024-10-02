@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom'
 import { MantineProvider } from '@mantine/core';
 import '@mantine/core/styles.css';
 import './index.css'
+import './translate/i18.js'
+
 
 createRoot(document.getElementById('root')).render(
   <MantineProvider>
