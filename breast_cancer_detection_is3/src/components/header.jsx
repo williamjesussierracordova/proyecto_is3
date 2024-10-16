@@ -31,7 +31,7 @@ const Header = () => {
                     <li><Link to={`/attention/${11111111}`} >{t('header:attentions')}</Link></li>
                     <li><Link to="/search">{t('header:search')}</Link></li>
                     <li><Link to="/contact" >{t('header:contact')}</Link></li>
-                    <li><button style={{backgroundColor:'transparent', paddingBlock:'0rem',border:'none',outline:'none'}} onClick={handleChangeLanguage}>{i18n.language === 'en' ? <Es style={{fontSize:'2rem'}}/> : <Us style={{fontSize:'2rem'}}/>}</button></li>
+                    {/*<li><button style={{backgroundColor:'transparent', paddingBlock:'0rem',border:'none',outline:'none'}} onClick={handleChangeLanguage}>{i18n.language === 'en' ? <Es style={{fontSize:'2rem'}}/> : <Us style={{fontSize:'2rem'}}/>}</button></li>*/}
                 </ul>
             </nav>
             <div className="menu-toggle" onClick={toggleMenu}>

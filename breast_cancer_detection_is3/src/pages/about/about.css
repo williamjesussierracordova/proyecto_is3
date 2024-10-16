@@ -1,0 +1,28 @@
+.about-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+  }
+  
+  .mantine-Container-root {
+    flex: 1;
+  }
+  
+  .mantine-Title-root {
+    color: #0056b3;
+  }
+  
+  .mantine-Text-root {
+    line-height: 1.6;
+  }
+  
+  .mantine-List-item {
+    margin-bottom: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .mantine-Container-root {
+      padding: 1rem;
+    }
+  }

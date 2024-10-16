@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Input, Button, PasswordInput, Loader } from '@mantine/core';
-import { useNavigate } from 'react-router-dom';
-import healthcare from '../../../public/assets/healthcare.webp';
-import logoHealthcare from '../../../public/assets/logo_healthcare.webp';
+import { Input, Button, PasswordInput } from '@mantine/core';
+import healthcare from '../../../../public/assets/healthcare.webp';
+import logoHealthcare from '../../../../public/assets/logo_healthcare.webp';
 import './login.css';
-import { validateMedicalCode, validatePassword } from '../../components/validators/validator';
-import useAuthStore from '../../stores/authStore';
+import { validateMedicalCode, validatePassword } from '../../validators/validator';
+import { useNavigate } from 'react-router-dom';
+import { getFirebaseAuth } from '../../../firebase/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { readUser } from '../../../firebase/userController';
+import bcryptjs from 'bcryptjs'
+import { Loader } from '@mantine/core';
+
+const auth = getFirebaseAuth();
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -16,16 +23,12 @@ const Login = () => {
 
   const [errors, setErrors] = useState({});
   const [isFormValid, setIsFormValid] = useState(false);
+  const [loginError, setLoginError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { login, isLoading, loginError, isAuthenticated, user } = useAuthStore();
-
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      navigate('/home');
-    }
-  }, [isAuthenticated, user, navigate]);
 
   useEffect(() => {
+    // Verificar si todos los campos son válidos
     const areAllFieldsValid = 
       !errors.medicalCode && 
       !errors.password &&
@@ -42,6 +45,7 @@ const Login = () => {
       [name]: value
     }));
 
+    // Validar el campo cuando cambia
     let error = '';
     switch (name) {
       case 'medicalCode':
@@ -62,9 +66,43 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    await login(formData.medicalCode, formData.password);
-  };
-
+    setIsLoading(true);
+    let userData = await readUser(formData.medicalCode);
+    console.log(userData);
+    if(!userData){
+      setIsLoading(false);
+      setLoginError("You are not registered in the system, please sign up");
+      return;
+    }
+    try{
+      const validPassword = await bcryptjs.compare(userData.password, formData.password);
+      if(!validPassword){
+        await signInWithEmailAndPassword(auth, userData.email , userData.password);
+        onAuthStateChanged(auth, (user) => {
+          if (user) {
+            setLoginError("");
+            console.log(userData);
+            setIsLoading(false);
+            navigate('/home');
+          }
+          else{
+            console.log("No user is signed in");
+            setIsLoading(false);
+          }
+        }
+        );
+      }
+      else{
+        setIsLoading(false);
+        setLoginError("Medical code or/and password incorrect");
+      }
+    }
+    catch (error) {
+      console.error("Error signing in:", error);
+      setIsLoading(false);
+      setLoginError("Medical code or/and password incorrect");
+  }
+  }
   return (
     <div className="login">
       <div className="login__image">
@@ -107,13 +145,14 @@ const Login = () => {
                 size="md"
                 radius="xl"
                 fullWidth
-                disabled={!isFormValid || isLoading}
+                disabled={!isFormValid}
               >
                 {isLoading ? <Loader color="violet" size="lg" type="dots" /> : 'Sign in'}
               </Button>
               
               <div className="login__form-links">
                 <p>Forgot your password? <a href="/recover_password">Click here</a></p>
+                <p>Don't have an account? <a href="/register">Sign up</a></p>
               </div>
             </div>
           </form>

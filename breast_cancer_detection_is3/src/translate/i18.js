@@ -89,7 +89,7 @@ i18n
           "explain6_2":"Detección de Cáncer de Mama es un proyecto nacido de la pasión y dedicación de estudiantes de ingeniería de software, con el objetivo de tener un impacto significativo en el campo de los diagnósticos médicos. Estamos comprometidos con la mejora continua y la colaboración con profesionales médicos para crear una herramienta que realmente pueda marcar la diferencia en la detección del cáncer de mama y los resultados de los pacientes."
         },
         attentions:{
-          "tittle":"Atenciones del Doctor",
+          "tittle":"Historial de Atenciones",
           "doctor":"Id Doctor",
           "date":"Dia",
           "time":"Hora",
@@ -98,7 +98,7 @@ i18n
           "case":"Caso",
         },
         search:{
-          "tittle":"Resultados de la búsqueda",	
+          "tittle":"Atenciones por paciente",	
           "date":"Fecha",
           "time":"Hora",
           "doctor":"Id Doctor",
@@ -106,6 +106,34 @@ i18n
           "image":"Imagen",
           "case":"Caso",
           "details":"Ver Detalles"
+        },case:{
+          "tittle":"Detalles del Caso",
+          "subtitle1":"Información del Caso",
+          "subtitle2":"Análisis de la Imagen",
+          "subtitle3":"Otros Casos",
+          "subtitle4":"Comparar Imágenes",
+          "subtitle5":"Validación del Doctor",
+          "date":"Fecha",
+          "time":"Hora",
+          "doctor":"Id Doctor",
+          "patient":"Id Paciente",
+          "case":"Id Caso",
+          "status"  :"Estado",
+          "pending": "Pendiente de Revisión",
+          "validated": "Validado",
+          "invalidated": "Invalidado",
+          "imageName":"Nombre de la Imagen",
+          "prediction":"Predicción",
+          "accuracy":"Precisión",
+          "other_cases_placeholder1":"Otros casos del paciente",
+          "other_cases_placeholder2":"Seleccione un caso",
+          "search_case":"Buscar Caso",
+          "comentsDoctor":"Comentarios del Doctor",
+          "comentsPlaceholder":"Ingrese sus comentarios sobre el caso y la detección",
+          "validateAnalisis":"Validar Análisis",
+          "invalidAnalisis":"Invalidar Análisis",
+          "buttonCompare":"Comparar Imágenes con AI",
+          "subtitle6":"Resultado de la comparación",
         }
       },
       en: {
@@ -190,7 +218,7 @@ i18n
           "explain6_2":"Breast Cancer Detection is a project born from the passion and dedication of software engineering students, aiming to make a significant impact in the field of medical diagnostics. We are committed to continuous improvement and collaboration with medical professionals to create a tool that can truly make a difference in breast cancer detection and patient outcomes."
         },
         attentions:{
-          "tittle":"Doctor Attentions",
+          "tittle":"History of Care",
           "doctor":"Id Doctor",
           "date":"Date",
           "time":"Time",
@@ -199,7 +227,7 @@ i18n
           "case":"Case",
         },
         search:{
-          "tittle":"Search Results",	
+          "tittle":"Patient's Attentions",	
           "date":"Date",
           "time":"Time",
           "doctor":"Id Doctor",
@@ -207,10 +235,39 @@ i18n
           "image":"Image",
           "case":"Case",
           "details":"View Details"
+        },
+        case:{
+          "tittle":"Case Details",
+          "subtitle1":"Case Information",
+          "subtitle2":"Image Analysis",
+          "subtitle3":"Other Cases",
+          "subtitle4":"Compare Images",
+          "subtitle5":"Doctor's Validation",
+          "date":"Date",
+          "time":"Time",
+          "doctor":"Doctor ID",
+          "patient":"Patient ID",
+          "case":"Case ID",
+          "status"  :"Status",
+          "pending": "Pending Review",
+          "validated": "Validated",
+          "invalidated": "Invalidated",
+          "imageName":"Image Name",
+          "prediction":"Prediction",
+          "accuracy":"Accuracy",
+          "other_cases_placeholder1":"Other cases of the patient",
+          "other_cases_placeholder2":"Select a case",
+          "search_case":"Search Case",
+          "comentsDoctor":"Doctor's Comments",
+          "comentsPlaceholder":"Enter your comments about the case and detection",
+          "validateAnalisis":"Validate Analysis",
+          "invalidAnalisis":"Invalidate Analysis",
+          "buttonCompare":"Compare Images with AI",
+          "subtitle6":"Result of the comparison",
         }
       }
     },
-    lng: "en", // idioma por defecto
+    lng: "es", // idioma por defecto
     fallbackLng: "en",
     interpolation: {
       escapeValue: false
