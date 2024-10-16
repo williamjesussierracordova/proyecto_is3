@@ -1,13 +1,14 @@
-import './medicalHistory.css'
-import Header from '../../components/header/header'
-import Footer from '../../components/footer/footer'
+import './search.css'
+import Header from '../../components/header'
+import Footer from '../../components/footer'
 import { Button, Input, Loader, Card, Text, Pagination, Container } from '@mantine/core'
 import { useTranslation } from 'react-i18next'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { validateMedicalCode } from '../../components/validators/validator'
+import { validateMedicalCode } from '../validators/validator'
 import { readPatient } from '../../firebase/patientController'
 import { readCasesByPatient } from '../../firebase/casesController'
+import { BackgroundImage } from '@mantine/core'
 
 const Search = () => {
     const { t } = useTranslation();
@@ -38,19 +39,26 @@ const Search = () => {
     const handleSearch = async (e) => {
         e.preventDefault();
         setIsLoading(true);
-        setSearchPerformed(true);
         setCurrentPage(1);
         try {
             const data = await readPatient(patientID);
             if (data) {
                 const cases = await readCasesByPatient(patientID);
                 setCasesPatient(cases);
-                console.log(cases);
+                setIsLoading(false);
+                setSearchPerformed(true);
+                if (Object.keys(cases).length === 0) {
+                    alert("No se encontraron casos para el paciente: " + patientID); 
+                    setSearchPerformed(false);
+                }
             } else {
                 alert("Patient not found");
+                setSearchPerformed(false);
             }
         } catch (error) {
             console.error(error);
+            alert("Error al buscar el paciente");
+            setSearchPerformed(false);
         } finally {
             setIsLoading(false);
         }
@@ -68,18 +76,28 @@ const Search = () => {
     return (
         <div className="searchPage">
             <Header />
+                <div className='image_back'>
+                    <BackgroundImage
+                        src="https://www.unir.net/wp-content/uploads/sites/22/2021/06/shutterstock_1783752014.jpg"
+                        style={{ height: 200, backgroundSize: 'cover' , 
+                        backgroundPosition: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center'
+                         }}
+                    >
+                        <h1 style={{color:'white'}}>{t("search:tittle")}</h1>
+                    </BackgroundImage>
+                </div>
                 <div className='searchForm'>
                     <form className="home-form-dni" onSubmit={handleSearch}>
                         <Input.Wrapper label={t('home:form:label')} error={error} style={{marginBottom:'0.5rem'}}>
                             <Input placeholder={t('home:form:placeholder')} value={patientID} onChange={handleChange} />
                         </Input.Wrapper>
-                        <Button type="submit" color="blue" disabled={!isIDValid || isLoading}>
+                        <Button type="submit" color="blue" disabled={!isIDValid || isLoading} style={{borderRadius:"10px"}}>
                             {isLoading ? <Loader color="white" size="sm" /> : t('home:form:button')}
                         </Button>
                     </form>
                 </div>
                 <div className='searchResults'>
-                    <h1>{t("search:tittle")}</h1>
+                    {/* <h1>{t("search:tittle")}</h1> */}
                     <div className='searchResultsContent'>
                         {searchPerformed && (
                             paginatedCases.length > 0 ? (

@@ -1,12 +1,12 @@
 import { Input, Button } from '@mantine/core';
-import healthcare from '../../../public/assets/healthcare.webp';
-import logoHealthcare from '../../../public/assets/logo_healthcare.webp';
+import healthcare from '../../../../public/assets/healthcare.webp';
+import logoHealthcare from '../../../../public/assets/logo_healthcare.webp';
 import '../login/login.css';
-import { validateEmail } from '../../components/validators/validator';
+import { validateEmail } from '../../validators/validator';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { sendPasswordResetEmail } from 'firebase/auth';
-import { getFirebaseAuth } from '../../firebase/firebase';
+import { getFirebaseAuth } from '../../../firebase/firebase';
 import { Loader } from '@mantine/core';
 const auth = getFirebaseAuth();
 const Login = () => {
@@ -106,6 +106,7 @@ const Login = () => {
               </Button>
               <div className="login__form-links">
                 <p>So you have an acount? <a href="/">Sign in</a></p>
+                <p>Don't have an account? <a href="/register">Sign up</a></p>
               </div>
             </div>
           </form>

@@ -1,0 +1,99 @@
+.cases-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f8f9fa;
+}
+
+.mantine-Container-root {
+    flex: 1;
+}
+
+.mantine-Title-root {
+    color: #0056b3;
+}
+
+.mantine-Card-root {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.mantine-Text-root {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.icon {
+    color: #0056b3;
+}
+
+.mantine-Image-root {
+    background-color: #e9ecef;
+    border-radius: 4px;
+}
+
+.mantine-Badge-root {
+    align-self: flex-start;
+}
+
+.mantine-Textarea-root {
+    margin-bottom: 20px;
+}
+
+.mantine-Button-root {
+    margin-top: 10px;
+}
+
+.m_e615b15f {
+    display: no flex;
+}
+
+.compare_images {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e9ecef;
+}
+
+.compare_image1, .compare_image2 {
+    display: flex; /* Añadir flexbox para centrar el contenido */
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center; /* Centrar verticalmente */
+    width: 50%;
+    flex: 1;
+    max-width: 50%; /* Asegura que cada imagen no exceda el 50% del ancho */
+}
+
+.badges_prediction{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-bottom: 1rem;
+}
+
+.badge_pred{
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    text-align: center; /
+}
+
+@media (max-width: 768px) {
+    .mantine-Grid-col {
+        margin-bottom: 20px;
+    }
+
+    .badges_prediction{
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .badge_pred{
+        min-width: 100%;
+        text-align: center;
+    }
+}

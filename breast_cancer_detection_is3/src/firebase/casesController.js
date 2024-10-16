@@ -1,6 +1,5 @@
 import { getFirebaseDb } from "./firebase.js";
-import { set, ref ,get} from "firebase/database";
-import { doc, updateDoc } from "firebase/firestore";
+import { set, ref ,get, update} from "firebase/database";
 
 const db = getFirebaseDb();
 
@@ -74,17 +73,55 @@ export async function readCasesByDoctor(doctorID) {
     }
 }
 
+// export const updateCaseValidation = async (caseId, isValid, doctorComment) => {
+//   try {
+//     console.log(caseId, isValid, doctorComment);
+//     console.log(db);
+//     const caseRef = doc(db, "cases", caseId);
+//     console.log(caseRef);
+//     await updateDoc(caseRef, {
+//       validationStatus: isValid,
+//       doctorComment: doctorComment,
+//       validationDate: new Date().toISOString()
+//     });
+//     console.log("Case validation updated successfully");
+//   } catch (error) {
+//     console.error("Error updating case validation: ", error);
+//     throw error; // Re-lanza el error para que pueda ser manejado en el componente
+//   }
+// };
+
 export const updateCaseValidation = async (caseId, isValid, doctorComment) => {
   try {
-    const caseRef = doc(db, "cases", caseId);
-    await updateDoc(caseRef, {
-      validationStatus: isValid,
-      doctorComment: doctorComment,
-      validationDate: new Date().toISOString()
-    });
-    console.log("Case validation updated successfully");
+      const caseRef = ref(db, `cases/${caseId}`); // Referencia a la ubicación del caso en la base de datos
+      await update(caseRef, {
+          validationStatus: isValid,
+          doctorComment: doctorComment,
+          validationDate: new Date().toISOString(),
+      });
+      console.log("Case validation updated successfully");
+      return true;
   } catch (error) {
-    console.error("Error updating case validation: ", error);
-    throw error; // Re-lanza el error para que pueda ser manejado en el componente
+      console.error("Error updating case validation:", error);
+      throw error; // Re-lanza el error para que pueda ser manejado en el componente
   }
 };
+
+export const updateCasePrediction = async (caseId, predictionClass, predictionAccuracy) =>{
+  try{
+    const caseRef = ref(db, `cases/${caseId}`);
+    await update(caseRef, {
+      predictionClass: predictionClass,
+      predictionAccuracy: predictionAccuracy
+    });
+    console.log("Case prediction updated successfully");
+    return true;
+  }
+  catch(error){
+    console.error("Error updating case prediction:", error);
+    throw error;
+  }
+
+}
+
+// prueba updateCaseValidation

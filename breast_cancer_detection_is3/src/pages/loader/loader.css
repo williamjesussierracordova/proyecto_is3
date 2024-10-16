@@ -1,0 +1,32 @@
+/* HTML: <div class="loaderPage"></div> */
+.loaderPage {
+    width: 20px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: #0056b3;
+    box-shadow: 0 0 0 0 #0004;
+    animation: l2 1.5s infinite linear;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.loaderPage:before,
+.loaderPage:after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: 0 0 0 0 #0004;
+    animation: inherit;
+    animation-delay: -0.5s;
+}
+
+.loaderPage:after {
+    animation-delay: -1s;
+}
+
+@keyframes l2 {
+    100% {box-shadow: 0 0 0 40px #0000}
+}
